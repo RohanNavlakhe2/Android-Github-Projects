@@ -1,0 +1,7 @@
+Executable : C:\Users\mauli\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+C:\Hard Drive Data\Android Proj\Github\ImageRotation\app\.cxx\Debug\5v666l62\armeabi-v7a
+imagerotation
+jvmArgs : 
+

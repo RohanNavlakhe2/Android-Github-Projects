@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Hard Drive Data\Android Proj\Github\ImageRotation\app\.cxx\Debug\5v666l62\armeabi-v7a'
+ninja: no work to do.

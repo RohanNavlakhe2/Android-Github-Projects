@@ -1,0 +1,9 @@
+
+a
+java:S1301Z"KReplace this "switch" statement by "if" statements to increase readability.(­æˆ±
+m	java:S116	"SRename this field "_handler" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…¿™Àúÿÿÿÿ
+X	java:S125"<This block of commented-out lines of code should be removed.(ÀÏÿ‚8Â¥ë¤™0
+I
+java:S1113Š"-Do not override the Object.finalize() method.(ÖÒ˜Ùùÿÿÿÿ
+u	java:S115“"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¯òõ“ùÿÿÿÿ
+u	java:S115“"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¯òõ“ùÿÿÿÿ

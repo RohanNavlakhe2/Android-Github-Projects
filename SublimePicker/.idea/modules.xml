@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SublimePicker.iml" filepath="$PROJECT_DIR$/.idea/modules/SublimePicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SublimePicker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SublimePicker.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sublimepickerlibrary/SublimePicker.sublimepickerlibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/sublimepickerlibrary/SublimePicker.sublimepickerlibrary.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,7 @@
+# ninja log v5
+1	20	0	clean	84be101a905a2df6
+1	194	677756727	CMakeFiles/imagerotation.dir/imagerotation.cpp.o	852e58c89e8006d2
+194	435	677756728	C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/build/intermediates/cxx/Debug/5v666l62/obj/x86/libimagerotation.so	5af0e06d8ddf0c5b
+1	25	0	clean	84be101a905a2df6
+2	172	677757443	CMakeFiles/imagerotation.dir/imagerotation.cpp.o	852e58c89e8006d2
+173	495	677757443	C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/build/intermediates/cxx/Debug/5v666l62/obj/x86/libimagerotation.so	5af0e06d8ddf0c5b

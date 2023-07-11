@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ImageRotation.iml" filepath="$PROJECT_DIR$/ImageRotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ImageRotation.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ImageRotation.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ndklib/ImageRotation.ndklib.iml" filepath="$PROJECT_DIR$/.idea/modules/ndklib/ImageRotation.ndklib.iml" />
+    </modules>
+  </component>
+</project>

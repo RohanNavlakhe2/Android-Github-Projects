@@ -1,0 +1,3 @@
+C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/.cxx/RelWithDebInfo/5u1m4r3p/x86_64/CMakeFiles/edit_cache.dir
+C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/.cxx/RelWithDebInfo/5u1m4r3p/x86_64/CMakeFiles/imagerotation.dir
+C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/.cxx/RelWithDebInfo/5u1m4r3p/x86_64/CMakeFiles/rebuild_cache.dir

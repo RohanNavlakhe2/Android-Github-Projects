@@ -1,0 +1,3 @@
+ninja: Entering directory `C:\Hard Drive Data\Android Proj\Github\ImageRotation\app\.cxx\Debug\5v666l62\x86_64'
+[1/2] Building CXX object CMakeFiles/imagerotation.dir/imagerotation.cpp.o
+[2/2] Linking CXX shared library "C:\Hard Drive Data\Android Proj\Github\ImageRotation\app\build\intermediates\cxx\Debug\5v666l62\obj\x86_64\libimagerotation.so"

@@ -1,0 +1,181 @@
+Index: app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/di/TestAppModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.androiddevs.shoppinglisttestingyt.di\r\n\r\nimport android.content.Context\r\nimport androidx.room.Room\r\nimport com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItemDatabase\r\nimport dagger.Module\r\nimport dagger.Provides\r\nimport dagger.hilt.InstallIn\r\nimport dagger.hilt.android.components.ApplicationComponent\r\nimport dagger.hilt.android.qualifiers.ApplicationContext\r\nimport javax.inject.Named\r\n\r\n@Module\r\n@InstallIn(ApplicationComponent::class)\r\nobject TestAppModule {\r\n\r\n    @Provides\r\n    @Named(\"test_db\")\r\n    fun provideInMemoryDb(@ApplicationContext context: Context) =\r\n        Room.inMemoryDatabaseBuilder(context, ShoppingItemDatabase::class.java)\r\n            .allowMainThreadQueries()\r\n            .build()\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/di/TestAppModule.kt b/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/di/TestAppModule.kt
+--- a/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/di/TestAppModule.kt	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ b/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/di/TestAppModule.kt	(date 1644584131566)
+@@ -14,6 +14,7 @@
+ @InstallIn(ApplicationComponent::class)
+ object TestAppModule {
+ 
++    //We're not using @SingleTon here because we want a new instance everytime for every test
+     @Provides
+     @Named("test_db")
+     fun provideInMemoryDb(@ApplicationContext context: Context) =
+Index: app/src/test/java/com/androiddevs/shoppinglisttestingyt/ui/ShoppingViewModelTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.androiddevs.shoppinglisttestingyt.ui\r\n\r\nimport androidx.arch.core.executor.testing.InstantTaskExecutorRule\r\nimport com.androiddevs.shoppinglisttestingyt.MainCoroutineRule\r\nimport com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItem\r\nimport com.androiddevs.shoppinglisttestingyt.getOrAwaitValueTest\r\nimport com.androiddevs.shoppinglisttestingyt.other.Constants\r\nimport com.androiddevs.shoppinglisttestingyt.other.Status\r\nimport com.androiddevs.shoppinglisttestingyt.repositories.DefaultShoppingRepository\r\nimport com.androiddevs.shoppinglisttestingyt.repositories.FakeShoppingRepository\r\nimport com.google.common.truth.Truth.assertThat\r\nimport kotlinx.coroutines.ExperimentalCoroutinesApi\r\nimport org.junit.Before\r\nimport org.junit.Rule\r\nimport org.junit.Test\r\n\r\n@ExperimentalCoroutinesApi\r\nclass ShoppingViewModelTest {\r\n\r\n    @get:Rule\r\n    var instantTaskExecutorRule = InstantTaskExecutorRule()\r\n\r\n    @get:Rule\r\n    var mainCoroutineRule = MainCoroutineRule()\r\n\r\n    private lateinit var viewModel: ShoppingViewModel\r\n\r\n    @Before\r\n    fun setup() {\r\n        viewModel = ShoppingViewModel(FakeShoppingRepository())\r\n    }\r\n\r\n    @Test\r\n    fun `insert shopping item with empty field, returns error`() {\r\n        viewModel.insertShoppingItem(\"name\", \"\", \"3.0\")\r\n\r\n        val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()\r\n\r\n        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)\r\n    }\r\n\r\n    @Test\r\n    fun `insert shopping item with too long name, returns error`() {\r\n        val string = buildString {\r\n            for(i in 1..Constants.MAX_NAME_LENGTH + 1) {\r\n                append(1)\r\n            }\r\n        }\r\n        viewModel.insertShoppingItem(string, \"5\", \"3.0\")\r\n\r\n        val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()\r\n\r\n        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)\r\n    }\r\n\r\n    @Test\r\n    fun `insert shopping item with too long price, returns error`() {\r\n        val string = buildString {\r\n            for(i in 1..Constants.MAX_PRICE_LENGTH + 1) {\r\n                append(1)\r\n            }\r\n        }\r\n        viewModel.insertShoppingItem(\"name\", \"5\", string)\r\n\r\n        val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()\r\n\r\n        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)\r\n    }\r\n\r\n    @Test\r\n    fun `insert shopping item with too high amount, returns error`() {\r\n        viewModel.insertShoppingItem(\"name\", \"9999999999999999999\", \"3.0\")\r\n\r\n        val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()\r\n\r\n        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)\r\n    }\r\n\r\n    @Test\r\n    fun `insert shopping item with valid input, returns success`() {\r\n        viewModel.insertShoppingItem(\"name\", \"5\", \"3.0\")\r\n\r\n        val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()\r\n\r\n        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.SUCCESS)\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/androiddevs/shoppinglisttestingyt/ui/ShoppingViewModelTest.kt b/app/src/test/java/com/androiddevs/shoppinglisttestingyt/ui/ShoppingViewModelTest.kt
+--- a/app/src/test/java/com/androiddevs/shoppinglisttestingyt/ui/ShoppingViewModelTest.kt	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ b/app/src/test/java/com/androiddevs/shoppinglisttestingyt/ui/ShoppingViewModelTest.kt	(date 1644584131599)
+@@ -1,5 +1,6 @@
+ package com.androiddevs.shoppinglisttestingyt.ui
+ 
++
+ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+ import com.androiddevs.shoppinglisttestingyt.MainCoroutineRule
+ import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItem
+@@ -10,6 +11,7 @@
+ import com.androiddevs.shoppinglisttestingyt.repositories.FakeShoppingRepository
+ import com.google.common.truth.Truth.assertThat
+ import kotlinx.coroutines.ExperimentalCoroutinesApi
++
+ import org.junit.Before
+ import org.junit.Rule
+ import org.junit.Test
+@@ -17,9 +19,17 @@
+ @ExperimentalCoroutinesApi
+ class ShoppingViewModelTest {
+ 
++    //We define this rule to make sure that all the tests run one by one and not parallely
++    //We use this rule when we're using any architecutre compoent in our tests.
++    //Specially LiveData
+     @get:Rule
+     var instantTaskExecutorRule = InstantTaskExecutorRule()
+ 
++
++    //some tests in this class are calling methods which runs the coroutine in the Main Dispatcher
++    //and Main Dispatchers uses Main Looper which is available only at runtime.
++    //And this is a local unit test that's why we define this rule.
++    //This rule replaces the Main Dispatcher with Test Dispatcher at the time of testing.
+     @get:Rule
+     var mainCoroutineRule = MainCoroutineRule()
+ 
+@@ -34,6 +44,9 @@
+     fun `insert shopping item with empty field, returns error`() {
+         viewModel.insertShoppingItem("name", "", "3.0")
+ 
++        //Live Data workds asynchronously that's why we observe it in our main code.
++        //But here to make everything work one after another we use this getOrAwaitValueTest() method
++        //which waits for the live data to emit the value.
+         val value = viewModel.insertShoppingItemStatus.getOrAwaitValueTest()
+ 
+         assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)
+Index: app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/data/local/ShoppingDaoTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.androiddevs.shoppinglisttestingyt.data.local\r\n\r\nimport androidx.arch.core.executor.testing.InstantTaskExecutorRule\r\nimport androidx.room.Room\r\nimport androidx.test.core.app.ApplicationProvider\r\nimport androidx.test.ext.junit.runners.AndroidJUnit4\r\nimport androidx.test.filters.SmallTest\r\nimport com.androiddevs.shoppinglisttestingyt.getOrAwaitValue\r\nimport com.google.common.truth.Truth.assertThat\r\nimport dagger.hilt.android.testing.HiltAndroidRule\r\nimport dagger.hilt.android.testing.HiltAndroidTest\r\nimport kotlinx.coroutines.ExperimentalCoroutinesApi\r\nimport kotlinx.coroutines.test.runBlockingTest\r\nimport org.junit.After\r\nimport org.junit.Before\r\nimport org.junit.Rule\r\nimport org.junit.Test\r\nimport org.junit.runner.RunWith\r\nimport javax.inject.Inject\r\nimport javax.inject.Named\r\n\r\n@ExperimentalCoroutinesApi\r\n@SmallTest\r\n@HiltAndroidTest\r\nclass ShoppingDaoTest {\r\n\r\n    @get:Rule\r\n    var hiltRule = HiltAndroidRule(this)\r\n\r\n    @get:Rule\r\n    var instantTaskExecutorRule = InstantTaskExecutorRule()\r\n\r\n    @Inject\r\n    @Named(\"test_db\")\r\n    lateinit var database: ShoppingItemDatabase\r\n    private lateinit var dao: ShoppingDao\r\n\r\n    @Before\r\n    fun setup() {\r\n        hiltRule.inject()\r\n        dao = database.shoppingDao()\r\n    }\r\n\r\n    @After\r\n    fun teardown() {\r\n        database.close()\r\n    }\r\n\r\n    @Test\r\n    fun insertShoppingItem() = runBlockingTest {\r\n\r\n        val shoppingItem = ShoppingItem(\"name\", 1, 1f, \"url\", id = 1)\r\n        dao.insertShoppingItem(shoppingItem)\r\n\r\n        val allShoppingItems = dao.observeAllShoppingItems().getOrAwaitValue()\r\n\r\n        assertThat(allShoppingItems).contains(shoppingItem)\r\n    }\r\n\r\n    @Test\r\n    fun deleteShoppingItem() = runBlockingTest {\r\n        val shoppingItem = ShoppingItem(\"name\", 1, 1f, \"url\", id = 1)\r\n        dao.insertShoppingItem(shoppingItem)\r\n        dao.deleteShoppingItem(shoppingItem)\r\n\r\n        val allShoppingItems = dao.observeAllShoppingItems().getOrAwaitValue()\r\n\r\n        assertThat(allShoppingItems).doesNotContain(shoppingItem)\r\n    }\r\n\r\n    @Test\r\n    fun observeTotalPriceSum() = runBlockingTest {\r\n        val shoppingItem1 = ShoppingItem(\"name\", 2, 10f, \"url\", id = 1)\r\n        val shoppingItem2 = ShoppingItem(\"name\", 4, 5.5f, \"url\", id = 2)\r\n        val shoppingItem3 = ShoppingItem(\"name\", 0, 100f, \"url\", id = 3)\r\n        dao.insertShoppingItem(shoppingItem1)\r\n        dao.insertShoppingItem(shoppingItem2)\r\n        dao.insertShoppingItem(shoppingItem3)\r\n\r\n        val totalPriceSum = dao.observeTotalPrice().getOrAwaitValue()\r\n\r\n        assertThat(totalPriceSum).isEqualTo(2 * 10f + 4 * 5.5f)\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/data/local/ShoppingDaoTest.kt b/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/data/local/ShoppingDaoTest.kt
+--- a/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/data/local/ShoppingDaoTest.kt	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ b/app/src/androidTest/java/com/androiddevs/shoppinglisttestingyt/data/local/ShoppingDaoTest.kt	(date 1644584131584)
+@@ -24,12 +24,17 @@
+ @HiltAndroidTest
+ class ShoppingDaoTest {
+ 
++    //Rule for Hilt to work
+     @get:Rule
+     var hiltRule = HiltAndroidRule(this)
+ 
+     @get:Rule
+     var instantTaskExecutorRule = InstantTaskExecutorRule()
+ 
++    //We have two modules in the project which provides Room Database.
++    //Here we need the dependency defined in the TestAppModule.
++    //So using @Named() annotation to make hilt clear about the selection
++    //Same @Named() annotation is being used in the TestAppModule also.
+     @Inject
+     @Named("test_db")
+     lateinit var database: ShoppingItemDatabase
+@@ -37,6 +42,7 @@
+ 
+     @Before
+     fun setup() {
++        //This line is required to make hilt inject the dependencies before each test case runs.
+         hiltRule.inject()
+         dao = database.shoppingDao()
+     }
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ /dev/null	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1644582327656)
++++ b/.idea/compiler.xml	(date 1644582327656)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ b/.idea/gradle.xml	(date 1644582327669)
+@@ -4,7 +4,7 @@
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <option name="testRunner" value="PLATFORM" />
++        <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="gradleJvm" value="1.8" />
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 03f60a1330bc6b278bea954faad7fb003720ba30)
++++ b/.idea/misc.xml	(date 1644582327682)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">

@@ -1,0 +1,40 @@
+{
+  "stringTable": {},
+  "buildFiles": [
+    "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\mauli\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+      "-C",
+      "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\.cxx\\Debug\\5v666l62\\x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\mauli\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+    "-C",
+    "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\.cxx\\Debug\\5v666l62\\x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "imagerotation-Debug-x86": {
+      "buildCommandComponents": [
+        "C:\\Users\\mauli\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe",
+        "-C",
+        "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\.cxx\\Debug\\5v666l62\\x86",
+        "imagerotation"
+      ],
+      "buildType": "debug",
+      "abi": "x86",
+      "artifactName": "imagerotation",
+      "output": "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\build\\intermediates\\cxx\\Debug\\5v666l62\\obj\\x86\\libimagerotation.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {},
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

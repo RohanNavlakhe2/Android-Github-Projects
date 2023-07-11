@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Hard Drive Data/Android Proj/Github/ImageRotation/app/.cxx/RelWithDebInfo/5u1m4r3p/x86_64",
+  "command": "C:\\Users\\mauli\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android21 --gcc-toolchain=C:/Users/mauli/AppData/Local/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/mauli/AppData/Local/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dimagerotation_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O2 -g -DNDEBUG -fPIC   -o CMakeFiles\\imagerotation.dir\\imagerotation.cpp.o -c \"C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\src\\main\\cpp\\imagerotation.cpp\"",
+  "file": "C:\\Hard Drive Data\\Android Proj\\Github\\ImageRotation\\app\\src\\main\\cpp\\imagerotation.cpp"
+}
+]
